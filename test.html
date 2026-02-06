@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f6fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+
+        .quiz-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            width: 400px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .answers {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .answer-card {
+            padding: 15px;
+            background: #eee;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+             transform: scale(1);
+         }
+
+        .answer-card:hover {
+            background: #dcdde1;
+            transform: scale(1.05);
+        }
+
+        .answer-card.selected {
+            background: #4cd137;
+            color: white;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            background: #273c75;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            background: #aaa;
+            cursor: not-allowed;
+        }
+        /* Animation fade */
+        .fade {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        .show {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.4s ease;
+        }
+
+        /* Progress bar */
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #ddd;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: #4cd137;
+            transition: width 0.4s ease;
+        }
+
+
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <div class="progress-bar">
+        <div id="progressFill" class="progress-fill"></div>
+    </div>
+
+    <h1 id="question">Question ici</h1>
+
+    <div class="answers" id="answers">
+        <!-- Cartes injectées en JS -->
+    </div>
+
+    <button disabled id="nextBtn">Suivant</button>
+
+    <p id="progress"></p>
+
+</div>
+
+<script>
+    const quiz = [
+        {
+            question: "Quelle est la capitale de la France ?",
+            answers: ["Paris", "Lyon", "Marseille", "Nice"],
+            correct: 0
+        },
+        {
+            question: "Quel langage est utilisé pour le web ?",
+            answers: ["Python", "HTML", "C++", "Java"],
+            correct: 1
+        },
+        {
+            question: "Combien font 2 + 2 ?",
+            answers: ["3", "4", "5", "22"],
+            correct: 1
+        }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+    let selectedAnswer = null;
+
+    const questionEl = document.getElementById("question");
+    const answersEl = document.getElementById("answers");
+    const nextBtn = document.getElementById("nextBtn");
+    const progressEl = document.getElementById("progress");
+
+
+    loadQuestion();
+
+
+    const progressFill = document.getElementById("progressFill");
+
+    function loadQuestion() {
+
+        // Fade out
+        questionEl.classList.remove("show");
+        answersEl.classList.remove("show");
+
+        setTimeout(() => {
+
+            // Reset
+            selectedAnswer = null;
+            nextBtn.disabled = true;
+            answersEl.innerHTML = "";
+
+            const q = quiz[currentQuestion];
+
+            // Nouveau contenu
+            questionEl.textContent = q.question;
+
+            q.answers.forEach((answer, index) => {
+
+                const card = document.createElement("div");
+                card.classList.add("answer-card");
+                card.textContent = answer;
+
+                card.addEventListener("click", () => {
+                    selectAnswer(card, index);
+                });
+
+                answersEl.appendChild(card);
+            });
+
+            // Progression
+            const percent =
+                ((currentQuestion) / quiz.length) * 100;
+
+            progressFill.style.width = percent + "%";
+
+            // Fade in
+            questionEl.classList.add("show");
+            answersEl.classList.add("show");
+
+        }, 10); // temps avant changement
+    }
+
+
+
+    // Sélection
+    function selectAnswer(card, index) {
+
+        // Retire ancienne sélection
+        document.querySelectorAll(".answer-card")
+            .forEach(c => c.classList.remove("selected"));
+
+        card.classList.add("selected");
+        selectedAnswer = index;
+
+        nextBtn.disabled = false;
+    }
+
+
+    // Bouton suivant
+    nextBtn.addEventListener("click", () => {
+
+        const correct = quiz[currentQuestion].correct;
+
+        if (selectedAnswer === correct) {
+            score++;
+        }
+
+        currentQuestion++;
+
+        if (currentQuestion < quiz.length) {
+            loadQuestion();
+        } else {
+            showResult();
+        }
+    });
+
+
+    // Résultat final
+    function showResult() {
+
+        questionEl.textContent = "Quiz terminé 🎉";
+
+        answersEl.innerHTML = `
+    <h2>Score : ${score} / ${quiz.length}</h2>
+  `;
+
+        nextBtn.style.display = "none";
+        progressEl.textContent = "";
+        progressFill.style.width = "100%";
+
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="Page internet quoi :c">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <title>Site de Saint-Valentin</title>
+    <link href="icone.ico" rel="icon"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+
+<body class="container-fluid bg-secondary">
+
+<div class="row vh-100">
+    <div class="col d-flex justify-content-center align-items-center">
+        <h1 class="text-center position-absolute top-0"> Site de vérification de la Saint-Valentin</h1>
+        <div class="card text-center" id ="partnerCard">
+            <div class="card-body">
+                <h5 class="card-title">Étape 1 : Choisissez votre partenaire</h5>
+                <p class="card-text">Entrez le nom de votre partenaire pour commencer le test
+                    de compatibilité.</p>
+                <form method="post">
+                    <div class="mb-3">
+                        <input class="form-control" id="partnerName" name="partnerName" placeholder="Nom de votre partenaire"
+                               required type="text">
+                    </div>
+                    <button class="btn btn-primary" type="submit">Suivant</button>
+                </form>
+            </div>
+        </div>
+        <div class="card text-center bg-danger d-none" id="errorCard">
+            <div class="card-body">
+                <h5 class="card-title"> ❌ Non !</h5>
+                <p class="card-text">De qui tu parles ? Recommence ! >:( </p>
+                    <button class="btn btn-primary" type="button" id="back">Pardon, je recommence !</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    const errorCard = document.getElementById('errorCard');
+    const backButton = document.getElementById('back');
+    const partnerCard = document.getElementById('partnerCard');
+    document.querySelector('form').addEventListener('submit', function (event) {
+        event.preventDefault(); // Empêche le rechargement de la page
+        const partnerName = document.getElementById('partnerName').value;
+        if (partnerName.trim().toLowerCase() === 'ylan') {
+            // Redirige vers la page suivante avec le nom du partenaire en paramètre
+            window.location.href = `step2.html`;
+        } else {
+            // Affiche la carte d'erreur
+            errorCard.classList.remove('d-none');
+            partnerCard.classList.add('d-none');
+        }
+    });
+    backButton.addEventListener('click', function () {
+        // Cache la carte d'erreur et affiche la carte de saisie
+        errorCard.classList.add('d-none');
+        partnerCard.classList.remove('d-none');
+    });
+
+</script>
+<script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

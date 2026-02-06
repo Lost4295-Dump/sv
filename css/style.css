@@ -1,0 +1,35 @@
+
+body{
+    position: absolute;
+    width: 100%;
+}
+
+.title:hover{
+    color:#ffb6c1;
+}
+
+footer{
+    position: relative;
+    bottom: 0;
+    height: auto;
+    background: #454545;
+    color: gainsboro;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.bg-secondary {
+    background-color: #ffe5eb !important;
+}
+
+
+#scrollUp
+{
+position: fixed;
+bottom : 10px;
+right: -100px;
+opacity: 0.5;
+z-index: 10;
+}
