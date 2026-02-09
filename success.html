@@ -1,5 +1,3 @@
-//Todo gifs au hasard d'amour, et des confettis jsp après
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -15,19 +13,29 @@
 <body class="container-fluid bg-secondary">
 
 <h1 class="text-center"> Site de vérification de la Saint-Valentin</h1>
-<div class="row">
-    <div class="col d-flex justify-content-center">
+<div class="row d-flex justify-content-center">
+    <h1> Woooohooohohohohooooooooooooo</h1>
+    <img src="#" alt="Gif d'amour" class="rounded" style="height:100%; width:auto" id="img">
 
-        <img alt="Bisou" class="img-fluid"
-             src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDkwaGw4c2pmajk5eDA5amZyeXl4OW1kYW8xaHJ0czN2aHcxM2RoYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/NKmXVFgwd8HKw/giphy.gif"/>
-    </div>
 </div>
-        <p class="text-center">Ce site a été créé pour vérifier si votre partenaire souhaite être votre valentin(e) cette année !</p>
-<div class="row">
-    <div class="col d-flex justify-content-center">
-        <a href="step1.html" class="btn btn-outline-success">Commencer</a>
-    </div>
-</div>
+<h1 class="text-center">💗💗💗💗💗💗 Je t'aimmmmeeueueueueuuuuuuh 💗💗💗💗💗💗</h1>
+<script>
+    // Fonction pour récupérer un GIF aléatoire d'amour
+    function fetchRandomLoveGif() {
+        const apiKey = 'EOEM57ZgKZOuEoydQ8tAGURoZDyomtMt';
+        const url = `https://api.giphy.com/v1/gifs/random?api_key=${apiKey}&tag=loveu&rating=g`;
+        fetch(url).then(
+            response => response.json()
+        ).then(
+            data => {
+                const imgUrl = data.data.images.original.url;
+                document.getElementById('img').src = imgUrl;
+            }
+        )
+    }
+    fetchRandomLoveGif()
+</script>
 <script src="js/bootstrap.bundle.min.js"></script>
+<script src="https://run.confettipage.com/here.js" data-confetticode="U2FsdGVkX195pD1uhWc9yOwnuA8AoJmbyPzd3Xr9XbgI4ei9VybKC0qCl5TZokrqBYelXiF2DTDv5d8Y+kfquX2siCbr6mJ2ZDUHYb0RzrbPbKVce/FMMG/B9WVl+8qlDRLaQ5J0+5fxUupE178WP6++jEA3PcgQNC594FbfsRWc6U2GdVHkAej8S3rXFN4MAW9oCz5pqBVHrNgJWJj/w+Mm9MUA1nkQYb5bcUYrAdmEAym7y8Ixxu0ogmpYjjGCJvKbTckGK/4MzRJXmEDZT45/i4Pb3W5Yi73UrW1cTglJYu96B2y5REfSGVc8alyzmi+6XkmC7lwrMCY8m08EhfWSNkJyC7E/Dr7NwmwsP1wneCLDhJtio1a4Rk0HiTRz9loXpaZHo5hMPFgsO6zCF/5lUSC9qHpnaBS78HffPLjBV16RqZ7wjak3CRJYDcj+UVB+3thXi+j9M44kLlMukz1xhVFjYFpHUcOr8+Vloh19VbR6iI6NyUoMxDBK0NWxhmWsa5manC0gyZ2qWfsbuBp78yq3MaLqE6LqPbO7rMZcSFK03cVnd+wFg7eyUB0HZfhjtStWOd8I/Jwwl1RNF7VYAAikBFA8mPondL3Zy10XA3+rwiE7TtdhQHw964sjs5FImR2TdFPcO107NbQ2poQM2KAH2Sf5bPNkHKMIzTP3j0q2adhf7R4iaCX8cNXbLCuFdn1F9G6MqGyvGF6He7wQdc/xMHg99CSJq2ew3qEnKV0JprCoAzDCNg0wgk1s"></script>
 </body>
 </html>
