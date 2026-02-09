@@ -7,7 +7,54 @@
     <link href="css/style.css" rel="stylesheet">
     <title>Site de Saint-Valentin</title>
     <link href="icone.ico" rel="icon"/>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #111;
+            overflow: hidden;
+        }
+
+        span {
+            position: absolute;
+            pointer-events: none;
+            filter: drop-shadow(0 0 15px rgba(0, 0, 0, 0.5));
+            animation: fadeInOut 1s linear infinite;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% {
+                opacity: 0;
+            }
+            20%, 80% {
+                opacity: 1;
+            }
+        }
+
+        span::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url(heart.png);
+            background-size: cover;
+            animation: moveShape 1s linear infinite;
+        }
+
+        @keyframes moveShape {
+            0% {
+                transform: translate(0) rotate(0deg);
+            }
+            100% {
+                transform: translate(300px) rotate(360deg);
+            }
+        }
+    </style>
 </head>
 
 <body class="container-fluid bg-secondary">
@@ -15,11 +62,33 @@
 <h1 class="text-center"> Site de vérification de la Saint-Valentin</h1>
 <div class="row d-flex justify-content-center">
     <h1> Woooohooohohohohooooooooooooo</h1>
-    <img src="#" alt="Gif d'amour" class="rounded" style="height:100%; width:auto" id="img">
+    <img alt="Gif d'amour" class="rounded" id="img" src="#" style="height:100%; width:auto">
 
 </div>
 <h1 class="text-center">💗💗💗💗💗💗 Je t'aimmmmeeueueueueuuuuuuh 💗💗💗💗💗💗</h1>
 <script>
+    document.addEventListener('mousemove', function (e) {
+        let body = document.querySelector('body');
+        let Heart = document.createElement('span');
+        let x = e.offsetX;
+        let y = e.offsetY;
+        Heart.style.left = x + 'px';
+        Heart.style.top = y + 'px';
+
+        let size = Math.random() * 80;
+        Heart.style.width = 20 + size + 'px';
+        Heart.style.height = 20 + size + 'px';
+
+        let transformValue = Math.random() * 360;
+        Heart.style.transform = 'rotate(' + transformValue + ' deg)';
+
+        body.append(Heart);
+
+        setTimeout(function () {
+            Heart.remove();
+        }, 1000);
+    })
+
     // Fonction pour récupérer un GIF aléatoire d'amour
     function fetchRandomLoveGif() {
         const apiKey = 'EOEM57ZgKZOuEoydQ8tAGURoZDyomtMt';
@@ -33,9 +102,11 @@
             }
         )
     }
+
     fetchRandomLoveGif()
 </script>
 <script src="js/bootstrap.bundle.min.js"></script>
-<script src="https://run.confettipage.com/here.js" data-confetticode="U2FsdGVkX195pD1uhWc9yOwnuA8AoJmbyPzd3Xr9XbgI4ei9VybKC0qCl5TZokrqBYelXiF2DTDv5d8Y+kfquX2siCbr6mJ2ZDUHYb0RzrbPbKVce/FMMG/B9WVl+8qlDRLaQ5J0+5fxUupE178WP6++jEA3PcgQNC594FbfsRWc6U2GdVHkAej8S3rXFN4MAW9oCz5pqBVHrNgJWJj/w+Mm9MUA1nkQYb5bcUYrAdmEAym7y8Ixxu0ogmpYjjGCJvKbTckGK/4MzRJXmEDZT45/i4Pb3W5Yi73UrW1cTglJYu96B2y5REfSGVc8alyzmi+6XkmC7lwrMCY8m08EhfWSNkJyC7E/Dr7NwmwsP1wneCLDhJtio1a4Rk0HiTRz9loXpaZHo5hMPFgsO6zCF/5lUSC9qHpnaBS78HffPLjBV16RqZ7wjak3CRJYDcj+UVB+3thXi+j9M44kLlMukz1xhVFjYFpHUcOr8+Vloh19VbR6iI6NyUoMxDBK0NWxhmWsa5manC0gyZ2qWfsbuBp78yq3MaLqE6LqPbO7rMZcSFK03cVnd+wFg7eyUB0HZfhjtStWOd8I/Jwwl1RNF7VYAAikBFA8mPondL3Zy10XA3+rwiE7TtdhQHw964sjs5FImR2TdFPcO107NbQ2poQM2KAH2Sf5bPNkHKMIzTP3j0q2adhf7R4iaCX8cNXbLCuFdn1F9G6MqGyvGF6He7wQdc/xMHg99CSJq2ew3qEnKV0JprCoAzDCNg0wgk1s"></script>
+<script data-confetticode="U2FsdGVkX195pD1uhWc9yOwnuA8AoJmbyPzd3Xr9XbgI4ei9VybKC0qCl5TZokrqBYelXiF2DTDv5d8Y+kfquX2siCbr6mJ2ZDUHYb0RzrbPbKVce/FMMG/B9WVl+8qlDRLaQ5J0+5fxUupE178WP6++jEA3PcgQNC594FbfsRWc6U2GdVHkAej8S3rXFN4MAW9oCz5pqBVHrNgJWJj/w+Mm9MUA1nkQYb5bcUYrAdmEAym7y8Ixxu0ogmpYjjGCJvKbTckGK/4MzRJXmEDZT45/i4Pb3W5Yi73UrW1cTglJYu96B2y5REfSGVc8alyzmi+6XkmC7lwrMCY8m08EhfWSNkJyC7E/Dr7NwmwsP1wneCLDhJtio1a4Rk0HiTRz9loXpaZHo5hMPFgsO6zCF/5lUSC9qHpnaBS78HffPLjBV16RqZ7wjak3CRJYDcj+UVB+3thXi+j9M44kLlMukz1xhVFjYFpHUcOr8+Vloh19VbR6iI6NyUoMxDBK0NWxhmWsa5manC0gyZ2qWfsbuBp78yq3MaLqE6LqPbO7rMZcSFK03cVnd+wFg7eyUB0HZfhjtStWOd8I/Jwwl1RNF7VYAAikBFA8mPondL3Zy10XA3+rwiE7TtdhQHw964sjs5FImR2TdFPcO107NbQ2poQM2KAH2Sf5bPNkHKMIzTP3j0q2adhf7R4iaCX8cNXbLCuFdn1F9G6MqGyvGF6He7wQdc/xMHg99CSJq2ew3qEnKV0JprCoAzDCNg0wgk1s"
+        src="https://run.confettipage.com/here.js"></script>
 </body>
 </html>
