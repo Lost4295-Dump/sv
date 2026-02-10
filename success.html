@@ -6,7 +6,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <title>Site de Saint-Valentin</title>
-    <link href="icone.ico" rel="icon"/>
+    <link href="heart.png" rel="icon"/>
     <style>
         * {
             margin: 0;
@@ -20,7 +20,7 @@
             overflow: hidden;
         }
 
-        span {
+        em {
             position: absolute;
             pointer-events: none;
             filter: drop-shadow(0 0 15px rgba(0, 0, 0, 0.5));
@@ -36,7 +36,7 @@
             }
         }
 
-        span::before {
+        em::before {
             content: '';
             position: absolute;
             width: 100%;
@@ -69,7 +69,7 @@
 <script>
     document.addEventListener('mousemove', function (e) {
         let body = document.querySelector('body');
-        let Heart = document.createElement('span');
+        let Heart = document.createElement('em');
         let x = e.offsetX;
         let y = e.offsetY;
         Heart.style.left = x + 'px';
