@@ -23,7 +23,7 @@
             background: white;
             padding: 30px;
             border-radius: 12px;
-            width: 400px;
+            width: 1350px;
             text-align: center;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
@@ -50,7 +50,7 @@
         }
 
         .answer-card.selected {
-            background:var(--bs-success);
+            background: var(--bs-success);
             color: white;
         }
 
@@ -111,7 +111,7 @@
             <div class="col d-flex flex-column align-items-center">
                 <div class="fs-5">Étape 2 : Test de connaissances</div>
                 <p class="text-muted">J'espère que tu as révisé !</p>
-                <div class="quiz-container">
+                <div class="quiz-container p-5 m-5">
                     <div class="progress-bar">
                         <div class="progress-fill" id="progressFill"></div>
                     </div>
@@ -133,21 +133,161 @@
 <script>
     const quiz = [
         {
-            question: "Quelle est la capitale de la France ?",
-            answers: ["Paris", "Lyon", "Marseille", "Nice"],
+            question: "Combien font 2 + 2 ?",
+            answers: ["3", "4", "Tu te fiches de moi ?", "22"],
+            correct: 1,
+            inQuizz: true,
+        },
+        {
+            question: "Est-ce que tu m'aimes ?",
+            answers: ["Pas trop", "Oui !", "Bof", "Je te déteste"],
+            inQuizz: true,
+            correct: 1
+        },
+        {
+            question: "Qu'est ce que tu aurais aimé cette saint-Valentin (comme on aura pas trop de trucs) ?",
+            answers: ["J'en sais rien", "Un restaurant", "Plus de choses.", "Un massage"],
+            inQuizz: false,
+            correct: 3
+        },
+        {
+            question: " Tu as une boisson qui te ferait plaisir pour dimanche ?",
+            answers: ["Quelque chose que j'aime", "Un bubble tea", "Tu devrais me connaitre", "Quelque chose de froid"],
+            inQuizz: false,
+            correct: 2
+        },
+        {
+            question: " Et une envie de plat ?",
+            answers: ["Quelque chose que j'aime", "Un burrito pitié", "Tu devrais me connaitre", "Un resto à volonté"],
+            inQuizz: false,
+            correct: 1
+        },
+        {
+            question: "Si on devait faire quelque chose d'inédit, ce serait quoi ?",
+            text:true,
+            inQuizz: false,
+            correct: 3
+        },
+        {
+            question: " J'aimerais t'offrir un cadeau ! Tu devines ?",
+            answers: ["Non.", "Un polaroid", "Tu as pas d'argent, c'est faux", "De l'argent"],
+            inQuizz: false,
             correct: 0
         },
         {
-            question: "Quel langage est utilisé pour le web ?",
-            answers: ["Python", "HTML", "C++", "Java"],
+            question: " Qu'est ce que tu voudrais absolument faire d'ici la fin de l'année ?",
+            answers: ["Une Saint-Valentin comme à Clamart", "Un voyage, un vrai", "Être avec toi dans un appart", "L'amour"],
+            inQuizz: false,
             correct: 1
         },
         {
-            question: "Combien font 2 + 2 ?",
-            answers: ["3", "4", "5", "22"],
+            question: "Où est-ce que je travaille ?",
+            answers: ["Je sais pas", "Courbevoie", "Dans ton cul", "À Paris"],
+            inQuizz: true,
             correct: 1
+        },
+        {
+            question: "Où est-ce que tu voudrais aller en voyage, cette année ?",
+            text:true,
+            inQuizz: false,
+            correct: 3
+        },
+        {
+            question: "Qu'est ce qu'on fait ce soir ?",
+            answers: ["Je sais pas", "On regarde un film", "On se fait des bisous", "On joue à un jeu"],
+            inQuizz: false,
+            correct: 1
+        },
+        {
+            question: "C'est quoi (d'après moi) ton jeu préféré ?",
+            answers: ["Je sais pas", "Animal Crossing", "Un jeu Hello Kitty", "Les Sims"],
+            inQuizz: true,
+            correct: 3
+        },
+        {
+            question: "J'ai mis combien de temps dans ce site ?",
+            answers: ["Je sais pas", "Pas assez", "Quatre ou cinq jours", "Une éternité"],
+            inQuizz: true,
+            correct: 2
+        },
+        {
+            question: "Je suis quelle ceinture au judo ?",
+            answers: ["Noir", "Noir 1er dan", "Noir 2ème dan", "Ylan Turin--Kondi (y'a ça sur ta ceinture)"],
+            inQuizz: true,
+            correct: 1
+        },
+        {
+            question: "Où est-ce que j'aimerais aller avec toi, rien qu'à deux ?",
+            inQuizz: true,
+            answers: ["Center Parcs", "En Angleterre", "Dans un châlet", "Peu importe du moment que c'est avec toi"],
+            correct: 3
+        },
+        {
+            question: "Qu'est ce que tu penses de moi ?",
+            text:true,
+            inQuizz: false,
+            correct: 3
+        },
+        {
+            question: "Qu'est ce que tu penses de toi, cette fois ?",
+            text:true,
+            inQuizz: false,
+            correct: 3
+        },
+        {
+            question: "Un avis sur ce quizz, jusque là ?",
+            text:true,
+            inQuizz: false,
+            correct: 3
+        },
+        {
+            question: "À ton avis, qu'est ce que j'aime le plus chez toi ?",
+            answers: ["Ton coeur", "Ta personnalité", "Toi", "Ton corps"],
+            inQuizz: true,
+            correct: 2
+        },
+        {
+            question: "Je suis curieux, quels sont tes kinks ? On en a jamais parlé en détail...",
+            inQuizz: false,
+            text:true,
+        },
+        {
+            question: "Et qu'est ce que tu aimes le plus chez moi ?",
+            inQuizz: false,
+            text: true,
+        },
+        {
+            question: "Qu'est ce que je pourrais faire mieux pour toi ?",
+            inQuizz: false,
+            text: true,
+        },
+        {
+            question: "On arrive bientôt à la fin ! Tu as le droit à combien d'animaux maximum ?",
+            inQuizz: true,
+            answers: ["0", "2", "3", "un millier"],
+            correct: 2
+        },
+        {
+            question: "Tu as une question à me poser ?",
+            inQuizz: false,
+            text: true,
+        },
+        {
+            question: "Ca fait combien de temps qu'on est ensemble ?",
+            inQuizz: true,
+            answers: ["Je sais pas", "95 ans", "6 ans", "5 ans, presque 6"],
+            correct: 3
+        },
+        {
+            question: "Tu veux ajouter quelque chose ? (désolé, je suis vraiment à court d'idées pour les questions)",
+            inQuizz: false,
+            text: true,
         }
     ];
+
+    const answersToSend = [];
+
+    const list = [];
 
     let currentQuestion = 0;
     let score = 0;
@@ -181,19 +321,30 @@
 
             // Nouveau contenu
             questionEl.textContent = q.question;
-
-            q.answers.forEach((answer, index) => {
-
-                const card = document.createElement("div");
-                card.classList.add("answer-card");
-                card.textContent = answer;
-
-                card.addEventListener("click", () => {
-                    selectAnswer(card, index);
+            if (q.text) {
+                const textEl = document.createElement("input");
+                textEl.type = "text";
+                textEl.id = "answerInput";
+                textEl.classList.add("form-control", "mb-3");
+                textEl.placeholder = "Ta réponse ici";
+                textEl.addEventListener("input", () => {
+                    nextBtn.disabled = textEl.value.trim() === "";
                 });
+                answersEl.appendChild(textEl);
+            } else {
+                q.answers.forEach((answer, index) => {
 
-                answersEl.appendChild(card);
-            });
+                    const card = document.createElement("div");
+                    card.classList.add("answer-card");
+                    card.textContent = answer;
+
+                    card.addEventListener("click", () => {
+                        selectAnswer(card, index);
+                    });
+
+                    answersEl.appendChild(card);
+                });
+            }
 
             // Progression
             const percent =
@@ -207,7 +358,6 @@
 
         }, 10); // temps avant changement
     }
-
 
 
     // Sélection
@@ -228,11 +378,23 @@
     nextBtn.addEventListener("click", () => {
 
         const correct = quiz[currentQuestion].correct;
-
-        if (selectedAnswer === correct) {
-            score++;
+        if (quiz[currentQuestion].inQuizz) {
+            list.push({
+                question: quiz[currentQuestion].question,
+                answer: quiz[currentQuestion].answers[selectedAnswer],
+                isCorrect: selectedAnswer === correct
+            })
+            if (selectedAnswer === correct) {
+                score++;
+            }
         }
 
+        const inputValue = document.getElementById("answerInput")?.value || "";
+
+        answersToSend.push({
+            question: quiz[currentQuestion].question,
+            answer: quiz[currentQuestion].text?inputValue:quiz[currentQuestion].answers[selectedAnswer],
+        })
         currentQuestion++;
 
         if (currentQuestion < quiz.length) {
@@ -249,12 +411,25 @@
         questionEl.textContent = "Quiz terminé 🎉";
 
         answersEl.innerHTML = `
-    <h2>Score : ${score} / ${quiz.length}</h2>
+    <h2>Score : ${score} / ${quiz.filter(elem => elem.inQuizz).length}</h2>
+    <p class="py-3 text-muted">Eh oui, toutes les questions ne comptaient pas pour le résultat du quizz !</p>
+    <h3>Voici les réponses que tu as données :</h3>
+    <ul class="text-start">
+        ${list.map(elem => `
+            <li>
+                <strong>${elem.question}</strong><br>
+                Ta réponse : ${elem.answer} ${elem.isCorrect ? "✅" : "❌"}
+                La bonne réponse était : ${quiz.find(q => q.question === elem.question).answers[quiz.find(q => q.question === elem.question).correct]}
+            </li>
+        `).join("")}
+    </ul>
   `;
 
         nextBtn.style.display = "none";
         progressEl.textContent = "";
         progressFill.style.width = "100%";
+
+        console.log(answersToSend);
 
     }
 
