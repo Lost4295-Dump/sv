@@ -122,6 +122,7 @@
                         <!-- Cartes injectées en JS -->
                     </div>
                     <button disabled id="nextBtn">Suivant</button>
+                    <a href="step3.html" id="endBtn" class="btn btn-outline-success" style="display: none">Passer à la suite</a>
                     <p id="progress"></p>
 
                 </div>
@@ -298,6 +299,8 @@
     const nextBtn = document.getElementById("nextBtn");
     const progressEl = document.getElementById("progress");
 
+    const endBtn = document.getElementById("endBtn");
+
 
     loadQuestion();
 
@@ -424,12 +427,31 @@
         `).join("")}
     </ul>
   `;
+        endBtn.style.display = "block";
 
         nextBtn.style.display = "none";
         progressEl.textContent = "";
         progressFill.style.width = "100%";
 
         console.log(answersToSend);
+
+        fetch("https://ptb.discord.com/api/webhooks/1471170189650432202/DTlNFA5bzuw1jxhc0UnAqzrceanS9t1XnAnrWY2OPW6dLPk9J0T61ik5h5bNyzLHb6-7",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    content: "Nouvelles réponses au quiz !",
+                    embeds: [
+                        {
+                            title: "Réponses du quiz de la Saint-Valentin",
+                            description: answersToSend.map(a => `**${a.question}**\n${a.answer}`).join("\n\n"),
+                            color: 0xFF69B4
+                        }
+                    ]
+                })
+            })
 
     }
 
